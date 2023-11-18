@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinle Dimension Array</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .program-container,
+        .output-container {
+            border: 2px solid #555; 
+            margin: 20px; 
+            padding: 20px;
+            background-color: white; 
+        }
+        nav {
+    display: flex;
+    text-align: center;
+    justify-content:space-between;
+    background-color: #555;
+    padding: 4px;
+}
+
+nav ul {
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    display: inline;
+    margin: 4px; 
+    padding: 0px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+nav a:hover {
+    color: #f11818; 
+}
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Java Programs</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="single dimension array.html">SINGLE DIMENSION ARRAY</a></li>
+            <li><a href="2darray.html">2D ARRAY</a></li>
+            <li><a href="bpc.html">BASIC PROGRAM CONSTRUCT</a></li>
+            <li><a href="string.html"> STRINGS </a></li>
+            <li><a href="awt.html"> AWT </a></li>
+            <li><a href="exceptionhandling.html">EXCEPTION HANDLING</a></li>
+            <li><a href="function.html"> FUNCTIONS </a></li>
+            <li><a href="inheritence.html"> INHERITANCE </a></li>
+            <li><a href="inputoutput.html"> INPUT/OUTPUT </a></li>
+            <li><a href="multithreading.html"> MULTITHREADING </a></li>
+            <li><a href="oop.html"> OOP </a></li>
+            <li><a href="packages.html"> PACKAGES </a></li>
+        </ul>
+    </nav>
+</header>
+<img src="java.png" alt="Java Image">
+
+<div class="program-container">
+    <h2>Program 1</h2>
+    <h3>Q.Write a Java program to create a basic Java thread that prints "Hello, World!" when executed. </h3>
+    <p>
+      
+<pre>
+    class sampleThread extends Thread{
+        public void run(){
+            System.out.println("hello world");
+        }
+    }
+    
+    
+    
+    public class Multithreading_1{
+      public static void main(String[] args) {
+        sampleThread foo = new sampleThread();
+        foo.run();
+        
+      }
+    }
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Multithreading/Multithreading_1.png" alt="Java Image">
+    </p>
+</div>
+
+<div class="program-container">
+    <h2>Program 2</h2>
+    <h3>Q.Write a Java program that sorts an array of integers using multiple threads. </h3>
+    <p>
+      
+<pre>
+    /* Write a Java Program that sorts an array of integers using multiple threads. */
+
+    import java.util.Arrays;
+    
+    class ParallelMergeSort {
+    
+        private final int[] array;
+    
+        private ParallelMergeSort(int[] array) {
+            this.array = array;
+        }
+    
+        private void merge(int low, int mid, int high) {
+            int[] left = Arrays.copyOfRange(array, low, mid + 1);
+            int[] right = Arrays.copyOfRange(array, mid + 1, high + 1);
+    
+            int i = 0, j = 0, k = low;
+    
+            while (i < left.length && j < right.length) {
+                if (left[i] <= right[j]) {
+                    array[k++] = left[i++];
+                } else {
+                    array[k++] = right[j++];
+                }
+            }
+    
+            while (i < left.length) {
+                array[k++] = left[i++];
+            }
+    
+            while (j < right.length) {
+                array[k++] = right[j++];
+            }
+        }
+    
+        private void mergeSort(int low, int high) {
+            if (low < high) {
+                int mid = (low + high) / 2;
+    
+                Thread leftThread = new Thread(() -> mergeSort(low, mid));
+                Thread rightThread = new Thread(() -> mergeSort(mid + 1, high));
+    
+                leftThread.start();
+                rightThread.start();
+    
+                try {
+                    leftThread.join();
+                    rightThread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+    
+                merge(low, mid, high);
+            }
+        }
+    
+        private static void parallelMergeSort(int[] array) {
+            ParallelMergeSort sorter = new ParallelMergeSort(array);
+            sorter.mergeSort(0, array.length - 1);
+        }
+    
+        public static void main(String[] args) {
+            int[] arr = {12, 4, 7, 3, 9, 5, 2, 1, 6, 11, 8, 10};
+    
+            System.out.println("Array before sorting: " + Arrays.toString(arr));
+            
+            parallelMergeSort(arr);
+    
+            System.out.println("Array after sorting: " + Arrays.toString(arr));
+        }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Multithreading/7007Multithreading3.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program3</h2>
+    <h3>Q.Write a Java program that calculates the sum of all prime numbers up to a given limit using multiple threads. </h3>
+    <p>
+      
+<pre>
+    // Calculate sum of prime numbers up to a given limit using multiple threads
+    class MyThread extends Thread {
+        private int start, end;
+        private int sum = 0;
+    
+        MyThread(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+    
+        public void run() {
+            System.out.println("My thread is running");
+            for (int i = start; i <= end; i++) {
+                if (isPrime(i))
+                    sum += i;
+            }
+        }
+    
+        boolean isPrime(int n) {
+            if (n == 0 || n == 1)
+                return false;
+            for (int i = 2; i <= Math.sqrt(n); ++i) {
+                if (n % i == 0)
+                    return false;
+            }
+            return true;
+        }
+    
+        public int getSum() {
+            return sum;
+        }
+    }
+    
+    class SumOfPrimes {
+        MyThread[] myThreads;
+        private int sum = 0;
+        private int limit = 20;
+        private static int threadCount = 4;
+    
+        // Constructor to initialize the array of threads
+        public SumOfPrimes(int n) throws InterruptedException {
+            this.myThreads = new MyThread[n];
+            for (int i = 0; i < n; i++) {
+                int start = ((limit * i) / n);
+                int end = (i == n-1) ? limit : ((limit * (i+1))/n) - 1;
+                myThreads[i] = new MyThread(start, end);
+            }
+        }
+    
+        // Function to start all threads
+        public void startAll() throws InterruptedException {
+            for (int i = 0; i < myThreads.length; i++) {
+                myThreads[i].start();
+                myThreads[i].join();
+            }
+        }
+    
+        public void getSum() {
+            for (int i = 0; i < myThreads.length; i++) {
+                this.sum += myThreads[i].getSum();
+            }
+        }
+        
+        public static void main(String[] args) {
+            try {
+                SumOfPrimes mt = new SumOfPrimes(threadCount);
+                mt.startAll();
+                mt.getSum();
+                System.out.println("Sum of prime numbers is " + mt.sum);
+            } catch (InterruptedException e) {
+                System.err.print("Error: " + e);
+            }
+        }
+    }
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Multithreading/7001Multithreading5.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 4</h2>
+    <h3>Q.Create the program to create multiple threads by using Runnbale interface </h3>
+    <p>
+      
+<pre>
+    class prog8 {
+        /*
+         * Topic = Multithread
+         * prog.no 8 Create the program to create multiple threads by using Runnbale
+         * interface
+         */
+        public static void main(String[] args) throws java.lang.ClassNotFoundException {
+    
+            Runnable r1 = new MyRun("This is Thread 1");
+            Runnable r2 = new MyRun("This isThread 2");
+            Runnable r3 = new MyRun("This isThread 3");
+    
+            Thread t1 = new Thread(r1);
+            Thread t2 = new Thread(r2);
+            Thread t3 = new Thread(r3);
+    
+            t1.start();
+            t2.start();
+            t3.start();
+        }
+    
+        @Override
+        public String toString() {
+            return "prog1 []";
+        }
+    }
+    
+    class MyRun implements Runnable {
+        private String tn;
+    
+        public MyRun(String name) {
+            this.tn = name;
+        }
+    
+        @Override
+        public void run() {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println(tn + " - Count is start: " + i);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            System.out.println(tn + " now running  has finished.");
+        }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Multithreading/Multithread7104prog8.png" alt="Java Image">
+    </p>
+</div>
+
+<footer>
+    <p>ABOUT US
+        Gurjeet Singh
+        Post Graduate Govt. Collage, Sector 11, Chandigarh.
+    </p>
+    <p>Contact Us: garrybains2002@gmail.com</p>
+</footer>
+
+</body>
+</html>

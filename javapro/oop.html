@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinle Dimension Array</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .program-container,
+        .output-container {
+            border: 2px solid #555; 
+            margin: 20px; 
+            padding: 20px;
+            background-color: white; 
+        }
+        nav {
+    display: flex;
+    text-align: center;
+    justify-content:space-between;
+    background-color: #555;
+    padding: 4px;
+}
+
+nav ul {
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    display: inline;
+    margin: 4px; 
+    padding: 0px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+nav a:hover {
+    color: #f11818; 
+}
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Java Programs</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="single dimension array.html">SINGLE DIMENSION ARRAY</a></li>
+            <li><a href="2darray.html">2D ARRAY</a></li>
+            <li><a href="bpc.html">BASIC PROGRAM CONSTRUCT</a></li>
+            <li><a href="string.html"> STRINGS </a></li>
+            <li><a href="awt.html"> AWT </a></li>
+            <li><a href="exceptionhandling.html">EXCEPTION HANDLING</a></li>
+            <li><a href="function.html"> FUNCTIONS </a></li>
+            <li><a href="inheritence.html"> INHERITANCE </a></li>
+            <li><a href="inputoutput.html"> INPUT/OUTPUT </a></li>
+            <li><a href="multithreading.html"> MULTITHREADING </a></li>
+            <li><a href="oop.html"> OOP </a></li>
+            <li><a href="packages.html"> PACKAGES </a></li>
+        </ul>
+    </nav>
+</header>
+<img src="java.png" alt="Java Image">
+
+<div class="program-container">
+    <h2>Program 1</h2>
+    <h3>Q.Write a Java program to create a class called "Book" with attributes for title, author, and ISBN, and methods to add and remove books from a collection. </h3>
+    <p>
+      
+<pre>
+    
+    class Book 
+    {
+        private String title;
+        private String author;
+        private String isbn;
+    
+        public Book(String title, String author, String isbn) {
+            this.title = title;
+            this.author = author;
+            this.isbn = isbn;
+        }
+    
+        public String getTitle() {
+            return title;
+        }
+    
+        public String getAuthor() {
+            return author;
+        }
+    
+        public String getISBN() {
+            return isbn;
+        }
+    
+        @Override
+        public String toString() {
+            return "Title: " + title + ", Author: " + author + ", ISBN: " + isbn;
+        }
+    }
+    
+    class BookCollection 
+    {
+        private Book[] books;
+        private int size;
+    
+        public BookCollection(int capacity) {
+            books = new Book[capacity];
+            size = 0;
+        }
+    
+        public void addBook(Book book) {
+            if (size < books.length) {
+                books[size] = book;
+                size++;
+            } else {
+                System.out.println("Collection is full. Cannot add more books.");
+            }
+        }
+    
+        public void removeBook(Book book) {
+            for (int i = 0; i < size; i++) {
+                if (books[i] == book) {
+                    // Shift elements to remove the book
+                    for (int j = i; j < size - 1; j++) {
+                        books[j] = books[j + 1];
+                    }
+                    books[size - 1] = null;
+                    size--;
+                    System.out.println("Book removed from the collection.");
+                    return;
+                }
+            }
+            System.out.println("Book not found in the collection.");
+        }
+    
+        public void displayBooks() {
+            if (size == 0) {
+                System.out.println("The collection is empty.");
+            } else {
+                for (int i = 0; i < size; i++) {
+                    System.out.println(books[i]);
+                }
+            }
+        }
+    }
+    
+    class Check {
+        public static void main(String[] args) {
+            BookCollection collection = new BookCollection(3);
+    
+            Book book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", "978-0743273565");
+            Book book2 = new Book("To Kill a Mockingbird", "Harper Lee", "978-0061120084");
+            Book book3 = new Book("1984", "George Orwell", "978-0451524935");
+    
+            collection.addBook(book1);
+            collection.addBook(book2);
+            collection.addBook(book3);
+    
+            System.out.println("Books in the collection:");
+            collection.displayBooks();
+    
+            System.out.println("\nRemoving 'The Great Gatsby' from the collection.");
+            collection.removeBook(book1);
+    
+            System.out.println("\nUpdated list of books in the collection:");
+            collection.displayBooks();
+        }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7055OOP5.png" alt="Java Image">
+    </p>
+</div>
+
+<div class="program-container">
+    <h2>Program 2</h2>
+    <h3>Q.Write a Java program to create a class called "Bank" with a collection of accounts and methods to add and remove accounts, and to deposit and withdraw money. Also define a class called "Account" to maintain account details of a particular customer. </h3>
+    <p>
+      
+<pre>
+    import java.util.ArrayList;
+    import java.util.List;
+    
+    class Bank {
+        private List<Account> accounts;
+    
+        public Bank() {
+            accounts = new ArrayList<>();
+        }
+    
+        public void addAccount(Account account) {
+            accounts.add(account);
+        }
+    
+        public void removeAccount(Account account) {
+            accounts.remove(account);
+        }
+    
+        public void depositMoney(Account account, double amount) {
+            account.deposit(amount);
+        }
+    
+        public void withdrawMoney(Account account, double amount) {
+            account.withdraw(amount);
+        }
+    }
+    
+    class Account {
+        private String customerName;
+        private double balance;
+    
+        public Account(String customerName) {
+            this.customerName = customerName;
+            balance = 0.0;
+        }
+    
+        public void deposit(double amount) {
+            balance += amount;
+        }
+    
+        public void withdraw(double amount) {
+            if (balance >= amount) {
+                balance -= amount;
+            } else {
+                System.out.println("Insufficient balance");
+            }
+        }
+    
+        public double getBalance() {
+            return balance;
+        }
+    }
+    
+    class Main {
+        public static void main(String[] args) {
+            Bank bank = new Bank();
+    
+            Account account1 = new Account("John Doe");
+            Account account2 = new Account("Jane Smith");
+    
+            bank.addAccount(account1);
+            bank.addAccount(account2);
+    
+            bank.depositMoney(account1, 1000.0);
+            bank.depositMoney(account2, 500.0);
+    
+            bank.withdrawMoney(account1, 200.0);
+            bank.withdrawMoney(account2, 100.0);
+    
+            System.out.println("Account 1 balance: " + account1.getBalance());
+            System.out.println("Account 2 balance: " + account2.getBalance());
+        }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7059oop7.png" alt="Java Image">
+    </p>
+</div>
+
+<div class="program-container">
+    <h2>Program 3</h2>
+    <h3>Q. Write a Java program to create class called "TrafficLight" with attributes for color and duration, and methods to change the color and check for red or green.</h3>
+    <p>
+      
+<pre>
+    class TrafficLight {
+        String color;
+        int durationInSeconds;
+       public TrafficLight(String initialColor, int initialDuration) {
+           this.color = initialColor;
+           this.durationInSeconds = initialDuration;
+       }
+   
+      public void changeColor(String newColor) {
+           color = newColor;
+           System.out.println("Traffic light color changed to " + color);
+       }
+   
+       public boolean isRed() {
+           return color.equalsIgnoreCase("red");
+       }
+   
+       public boolean isGreen() {
+           return color.equalsIgnoreCase("green");
+       }
+   
+       public int getDuration() {
+           return durationInSeconds;
+       }
+   
+       public void setDuration(int newDuration) {
+           durationInSeconds = newDuration;
+           System.out.println("Traffic light duration set to " + durationInSeconds + " seconds");
+       }
+   }
+   
+    class M3 {
+       public static void main(String[] args) {
+           TrafficLight trafficLight = new TrafficLight("red", 60);
+   
+           System.out.println("Initial State:");
+           displayTrafficLightInfo(trafficLight);
+   
+           trafficLight.changeColor("green");
+           displayTrafficLightInfo(trafficLight);
+   
+           System.out.println("Is it red? " + trafficLight.isRed());
+   
+           System.out.println("Is it green? " + trafficLight.isGreen());
+   
+           trafficLight.setDuration(45);
+           displayTrafficLightInfo(trafficLight);
+       }
+   
+       private static void displayTrafficLightInfo(TrafficLight trafficLight) {
+           System.out.println("Current Color: " + trafficLight.color);
+           System.out.println("Current Duration: " + trafficLight.getDuration() + " seconds");
+           System.out.println();
+       }
+   }
+   
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7015oop8.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 4</h2>
+    <h3>Q.Write a Java program to create a class called "Student" with a name, grade, and courses attributes, and methods to add and remove courses. </h3>
+    <p>
+      
+<pre>
+
+    //Write a Java program to create a class called "Student" with a name, grade, and courses attributes, and methods to add and remove courses.
+
+
+    import java.util.ArrayList;
+    import java.util.List;
+    
+    class Student {
+        private String name;
+        private int grade;
+        private List<String> courses;
+    
+        public Student(String name, int grade) {
+            this.name = name;
+            this.grade = grade;
+            this.courses = new ArrayList<String>();
+        }
+    
+        public String getName() {
+            return name;
+        }
+    
+        public int getGrade() {
+            return grade;
+        }
+    
+        public List<String> getCourses() {
+            return courses;
+        }
+    
+        public void addCourse(String courseName) {
+            courses.add(courseName);
+        }
+    
+        public void removeCourse(String courseName) {
+            courses.remove(courseName);
+        }
+    
+        public void displayStudentInfo() {
+            System.out.println("Name: " + name);
+            System.out.println("Grade: " + grade);
+            System.out.println("Courses: " + courses);
+        }
+    }
+    
+    class StudentTest {
+        public static void main(String[] args) {
+            Student student1 = new Student("Bharat Bhatt",7101);
+    
+            student1.addCourse("Maths");
+            student1.addCourse("Java");
+            student1.addCourse("PhP");
+    
+            System.out.println("Student Information:");
+            student1.displayStudentInfo();
+    
+            student1.removeCourse("Maths");
+    
+            System.out.println("\nStudent Information after removing a course:");
+            student1.displayStudentInfo();
+        }
+    }
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7101oop10.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 5</h2>
+    <h3>Q.Write a Java program to create a class called "School" with attributes for students, teachers, and classes, and methods to add and remove students and teachers, and to create classes. </h3>
+    <p>
+      
+<pre>
+    /*
+    1. Write a Java program to create a class called "Library" with a collection of books and methods to add and remove books.
+    */ 
+    
+    class Library 
+    {
+        String[] book = new String[5];
+    
+        int size = 5;
+    
+        int index;
+        
+        void add(String bookname)
+        {
+            if (index == 5)
+            {
+                book[index] = bookname;
+                index++;
+            }
+            else
+            {
+                System.out.println("index out of bond");
+            }
+        }
+        void remove()
+        {
+            if (index == 0)
+            {
+                index--;
+            }
+            else
+            {
+                System.out.println("not element to remove");
+            }
+        }
+    
+        void displaybook()
+        {
+            for (int i = 0; i < index; i++) {
+                System.out.println(book[i]);
+            }
+        }
+    }
+    class Test
+    {
+        public static void main(String[] args) {
+            
+            Library l = new Library();
+    
+            l.add("time of error");
+            l.add("hello bro");
+            l.add("hero time");
+    
+            l.remove();
+    
+    
+    
+            l.displaybook();
+    
+        }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7025oop14.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 6</h2>
+    <h3>Q.Write a Java program to create a class called "MusicLibrary" with a collection of songs and methods to add and remove songs, and to play a random song. </h3>
+    <p>
+      
+<pre>
+    import java.util.ArrayList;
+    import java.util.List;
+    import java.util.Random;
+    
+    class Song {
+        private String title;
+        private String artist;
+    
+        public Song(String title, String artist) {
+            this.title = title;
+            this.artist = artist;
+        }
+    
+        public String getTitle() {
+            return title;
+        }
+    
+        public String getArtist() {
+            return artist;
+        }
+        public String toString() {
+            return "Song: " + title + " by " + artist;
+        }
+    }
+    
+    class musiclibrary {
+        private List<Song> songs;
+    
+        public musiclibrary() {
+            this.songs = new ArrayList<Song>();
+        }
+    
+        public void addSong(String title, String artist) {
+            Song newSong = new Song(title, artist);
+            songs.add(newSong);
+            System.out.println("Added song: " + newSong);
+        }
+    
+        public void removeSong(String title, String artist) {
+            Song songToRemove = new Song(title, artist);
+            if (songs.remove(songToRemove)) {
+                System.out.println("Removed song: " + songToRemove);
+            } else {
+                System.out.println("Song not found: " + songToRemove);
+            }
+        }
+    
+        public void playRandomSong() {
+            if (songs.isEmpty()) {
+                System.out.println("No songs in the library. Add some songs first.");
+            } else {
+                Random random = new Random();
+                int randomIndex = random.nextInt(songs.size());
+                Song randomSong = songs.get(randomIndex);
+                System.out.println("Now playing: " + randomSong);
+            }
+        }
+    
+        public static void main(String[] args) {
+            musiclibrary myLibrary = new musiclibrary();
+    
+            myLibrary.addSong("Shape of You", "Ed Sheeran");
+            myLibrary.addSong("Someone Like You", "Adele");
+            myLibrary.addSong("Despacito", "Luis Fonsi");
+    
+            myLibrary.playRandomSong();
+    
+            myLibrary.removeSong("Someone Like You", "Adele");
+    
+            myLibrary.playRandomSong();
+        }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7003oop15.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 7</h2>
+    <h3>Q.Write a Java program to create a class called "Person" with a name and age attribute. Create two instances of the "Person" class, set their attributes using the constructor, and print their name and age. </h3>
+    <p>
+      
+<pre>
+    // Person.java
+    class Person {
+        private String name;
+        private int age;
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+        public String getName() {
+            return name;
+        }
+        public int getAge() {
+            return age;
+        }
+    }
+    // Main.java
+     class Main {
+      public static void main(String[] args) {
+        Person person1 = new Person("Ean Craig", 11);
+        Person person2 = new Person("Evan Ross", 12);
+        System.out.println(person1.getName() + " is " + person1.getAge() + " years old.");
+        System.out.println(person2.getName() + " is " + person2.getAge() + " years old.\n");
+      }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/oop1.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 8</h2>
+    <h3>Q.Write a Java program to create a class called "Dog" with a name and breed attribute. Create two instances of the "Dog" class, set their attributes using the constructor and modify the attributes using the setter methods and print the updated values. </h3>
+    <p>
+      
+<pre>
+    public class Dog {
+        private String name;
+        private String breed;
+    
+        public Dog(String name, String breed) {
+            this.name = name;
+            this.breed = breed;
+        }
+    
+        public void setName(String name) {
+            this.name = name;
+        }
+    
+        public void setBreed(String breed) {
+            this.breed = breed;
+        }
+    
+        public String getName() {
+            return name;
+        }
+    
+        public String getBreed() {
+            return breed;
+        }
+    
+        public static void main(String[] args) {
+            Dog dog1 = new Dog("Max", "Labrador");
+            Dog dog2 = new Dog("Bella", "Golden Retriever");
+    
+            System.out.println("Initial values:");
+            System.out.println("Dog 1 - Name: " + dog1.getName() + ", Breed: " + dog1.getBreed());
+            System.out.println("Dog 2 - Name: " + dog2.getName() + ", Breed: " + dog2.getBreed());
+    
+            dog1.setName("Charlie");
+            dog2.setBreed("German Shepherd");
+    
+            System.out.println("\nUpdated values:");
+            System.out.println("Dog 1 - Name: " + dog1.getName() + ", Breed: " + dog1.getBreed());
+            System.out.println("Dog 2 - Name: " + dog2.getName() + ", Breed: " + dog2.getBreed());
+        }
+    }
+    
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/oop2.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 9</h2>
+    <h3>Q.Write a Java program to create a class called "Circle" with a radius attribute. You can access and modify this attribute. Calculate the area and circumference of the circle.. </h3>
+    <p>
+      
+<pre>
+    class prog4 {
+        /*
+         * Topic = OOP
+         * prog.no 4. Write a Java program to create a class called "Circle" with a
+         * radius attribute.
+         * You can access and modify this attribute. Calculate the area and
+         * circumference of the circle
+         */
+        private double radius;
+    
+        public prog4(double radius) {
+            this.radius = radius;
+        }
+    
+        public double getRadius() {
+            return radius;
+        }
+    
+        public void setRadius(double radius) {
+            this.radius = radius;
+        }
+    
+        public double calculateArea() {
+            return Math.PI * radius * radius;
+        }
+    
+        public double calculateCircumference() {
+            return 2 * Math.PI * radius;
+        }
+    
+        public static void main(String[] args) throws java.lang.ClassNotFoundException {
+    
+            prog4 myCircle = new prog4(5.0);
+    
+            System.out.println("Radius: " + myCircle.getRadius());
+    
+            myCircle.setRadius(7.5);
+            System.out.println("Updated Radius: " + myCircle.getRadius());
+    
+            double area = myCircle.calculateArea();
+            double circumference = myCircle.calculateCircumference();
+    
+            System.out.println("Area: " + area);
+            System.out.println("Circumference: " + circumference);
+        }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7104oop4.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 10</h2>
+    <h3>Q.   Write a Java program to create a class called "Employee" with a name, salary, and hire date attributes, and a method to calculate years of service.</h3>
+    <p>
+      
+<pre>
+    import java.text.SimpleDateFormat;
+    import java.util.Date;
+    
+    // Write a Java program to create a class called "Employee" with a name, salary, and hire date attributes,
+     //and a method to calculate years of service.
+    
+    class Employee {
+        private String name;
+        private double salary;
+        private Date hireDate;
+    
+        public Employee(String name, double salary, Date hireDate) {
+            this.name = name;
+            this.salary = salary;
+            this.hireDate = hireDate;
+        }
+    
+        public String getName() {
+            return name;
+        }
+    
+        public double getSalary() {
+            return salary;
+        }
+    
+        public Date getHireDate() {
+            return hireDate;
+        }
+    
+        public int calculateYearsOfService() {
+            Date currentDate = new Date();
+            long millisecondsInYear = 1000L * 60 * 60 * 24 * 365;
+            long difference = currentDate.getTime() - hireDate.getTime();
+            int years = (int) (difference / millisecondsInYear);
+            return years;
+        }
+    }
+    
+     class kamal7019javaOOP9 {
+        public static void main(String[] args) {
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date hireDate = dateFormat.parse("2010-06-15");
+                
+                Employee employee = new Employee("John Doe", 60000.0, hireDate);
+    
+                System.out.println("Name: " + employee.getName());
+                System.out.println("Salary: $" + employee.getSalary());
+                System.out.println("Hire Date: " + dateFormat.format(employee.getHireDate()));
+    
+                int yearsOfService = employee.calculateYearsOfService();
+                System.out.println("Years of Service: " + yearsOfService + " years");
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+    
+    
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7019oop9.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 11</h2>
+    <h3>Q.Write a Java program to create a class called "Student" with a name, grade, and courses attributes, and methods to add and remove courses. </h3>
+    <p>
+      
+<pre>
+
+    //Write a Java program to create a class called "Student" with a name, grade, and courses attributes, and methods to add and remove courses.
+
+
+    import java.util.ArrayList;
+    import java.util.List;
+    
+    class Student {
+        private String name;
+        private int grade;
+        private List<String> courses;
+    
+        public Student(String name, int grade) {
+            this.name = name;
+            this.grade = grade;
+            this.courses = new ArrayList<String>();
+        }
+    
+        public String getName() {
+            return name;
+        }
+    
+        public int getGrade() {
+            return grade;
+        }
+    
+        public List<String> getCourses() {
+            return courses;
+        }
+    
+        public void addCourse(String courseName) {
+            courses.add(courseName);
+        }
+    
+        public void removeCourse(String courseName) {
+            courses.remove(courseName);
+        }
+    
+        public void displayStudentInfo() {
+            System.out.println("Name: " + name);
+            System.out.println("Grade: " + grade);
+            System.out.println("Courses: " + courses);
+        }
+    }
+    
+    class StudentTest {
+        public static void main(String[] args) {
+            Student student1 = new Student("Bharat Bhatt",7101);
+    
+            student1.addCourse("Maths");
+            student1.addCourse("Java");
+            student1.addCourse("PhP");
+    
+            System.out.println("Student Information:");
+            student1.displayStudentInfo();
+    
+            student1.removeCourse("Maths");
+    
+            System.out.println("\nStudent Information after removing a course:");
+            student1.displayStudentInfo();
+        }
+    }
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7101oop10.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 12</h2>
+    <h3>Q. Write a Java program to create a class called "Library" with a collection of books and methods to add and remove books. </h3>
+    <p>
+      
+<pre>
+    import java.util.ArrayList;
+    //Book.java
+    public class Book {
+      private String title;
+      private String author;
+    
+      public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+      }
+    
+      public String getTitle() {
+        return title;
+      }
+    
+      public void setTitle(String title) {
+        this.title = title;
+      }
+    
+      public String getAuthor() {
+        return author;
+      }
+    
+      public void setAuthor(String author) {
+        this.author = author;
+      }
+    }
+    //Library.java
+    
+    public class Library {
+      private ArrayList < Book > books;
+    
+      public Library() {
+        books = new ArrayList < Book > ();
+      }
+    
+      public void addBook(Book book) {
+        books.add(book);
+      }
+    
+      public void removeBook(Book book) {
+        books.remove(book);
+      }
+    
+      public ArrayList < Book > getBooks() {
+        return books;
+      }
+    }
+    //Main.java
+    public class Main {
+      public static void main(String[] args) {
+        Library library = new Library();
+    
+        Book book1 = new Book("Adventures of Tom Sawyer", "Mark Twain");
+        Book book2 = new Book("Ben Hur", "Lewis Wallace");
+        Book book3 = new Book("Time Machine", "H.G. Wells");
+        Book book4 = new Book("Anna Karenina", "Leo Tolstoy");
+    
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+        library.addBook(book4);
+    
+        System.out.println("Books in the library:");
+        for (Book book: library.getBooks()) {
+          System.out.println(book.getTitle() + " by " + book.getAuthor());
+        }
+    
+        library.removeBook(book2);
+        System.out.println("\nBooks in the library after removing " + book2.getTitle() + ":");
+        for (Book book: library.getBooks()) {
+          System.out.println(book.getTitle() + " by " + book.getAuthor());
+        }
+      }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/opp11.png" alt="Java Image">
+    </p>
+</div>
+<div class="program-container">
+    <h2>Program 13</h2>
+    <h3>Q.Write a Java program to create a class called "Shape" with abstract methods for calculating area and perimeter, and subclasses for "Rectangle", "Circle", and "Triangle". </h3>
+    <p>
+      
+<pre>
+
+    abstract class Shape {
+        public abstract double calculateArea();
+        public abstract double calculatePerimeter();
+    }
+    
+    class Rectangle extends Shape {
+        private double length;
+        private double width;
+    
+        public Rectangle(double length, double width) {
+            this.length = length;
+            this.width = width;
+        }
+    
+    
+        public double calculateArea() {
+            return length * width;
+        }
+    
+     
+        public double calculatePerimeter() {
+            return 2 * (length + width);
+        }
+    }
+    
+    class Circle extends Shape {
+        private double radius;
+    
+        public Circle(double radius) {
+            this.radius = radius;
+        }
+    
+        
+        public double calculateArea() {
+            return Math.PI * radius * radius;
+        }
+    
+        public double calculatePerimeter() {
+            return 2 * Math.PI * radius;
+        }
+    }
+    
+    class Triangle extends Shape {
+        private double side1;
+        private double side2;
+        private double side3;
+    
+        public Triangle(double side1, double side2, double side3) {
+            this.side1 = side1;
+            this.side2 = side2;
+            this.side3 = side3;
+        }
+    
+        public double calculateArea() {
+            // Using Heron's formula for the area of a triangle
+            double s = (side1 + side2 + side3) / 2;
+            return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+        }
+    
+        public double calculatePerimeter() {
+            return side1 + side2 + side3;
+        }
+    }
+    
+     class M2 {
+        public static void main(String[] args) {
+            Rectangle rectangle = new Rectangle(5, 10);
+            Circle circle = new Circle(7);
+            Triangle triangle = new Triangle(3, 4, 5);
+    
+            displayShapeInfo(rectangle);
+            displayShapeInfo(circle);
+            displayShapeInfo(triangle);
+        }
+    
+        private static void displayShapeInfo(Shape shape) {
+            System.out.println("Shape Type: " + shape.getClass().getSimpleName());
+            System.out.println("Area: " + shape.calculateArea());
+            System.out.println("Perimeter: " + shape.calculatePerimeter());
+            System.out.println();
+        }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7015oop16.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 14</h2>
+    <h3>Q.Write a Java program to create a class called "Restaurant" with attributes for menu items, prices, and ratings, and methods to add and remove items, and to calculate average rating. </h3>
+    <p>
+      
+<pre>
+    import java.util.ArrayList;
+
+    public class Restaurant {
+      private ArrayList<String> menuItems;
+      private ArrayList<Double> prices;
+      private ArrayList<Integer> ratings;
+      private ArrayList<Integer> itemCounts;
+    
+      public Restaurant() {
+        this.menuItems = new ArrayList<String>();
+        this.prices = new ArrayList<Double>();
+        this.ratings = new ArrayList<Integer>();
+        this.itemCounts = new ArrayList<Integer>();
+      }
+    
+      public void addItem(String item, double price) {
+        this.menuItems.add(item);
+        this.prices.add(price);
+        this.ratings.add(0);
+        this.itemCounts.add(0);
+      }
+    
+      public void removeItem(String item) {
+        int index = this.menuItems.indexOf(item);
+        if (index >= 0) {
+          this.menuItems.remove(index);
+          this.prices.remove(index);
+          this.ratings.remove(index);
+          this.itemCounts.remove(index);
+        }
+      }
+    
+      public void addRating(String item, int rating) {
+        int index = this.menuItems.indexOf(item);
+        if (index >= 0) {
+          int currentRating = this.ratings.get(index);
+          int totalCount = this.itemCounts.get(index);
+          this.ratings.set(index, currentRating + rating);
+          this.itemCounts.set(index, totalCount + 1);
+        }
+      }
+    
+      public double getAverageRating(String item) {
+        int index = this.menuItems.indexOf(item);
+        if (index >= 0) {
+          int totalRating = this.ratings.get(index);
+          int itemCount = this.itemCounts.get(index);
+          return itemCount > 0 ? (double) totalRating / itemCount : 0.0;
+        } else {
+          return 0.0;
+        }
+      }
+    
+      public void displayMenu() {
+        for (int i = 0; i < menuItems.size(); i++) {
+          System.out.println(menuItems.get(i) + ": $" + prices.get(i));
+        }
+      }
+    
+      public double calculateAverageRating() {
+        double totalRating = 0;
+        int numRatings = 0;
+        for (int i = 0; i < ratings.size(); i++) {
+          totalRating += ratings.get(i);
+          numRatings++;
+        }
+        return numRatings > 0 ? totalRating / numRatings : 0.0;
+      }
+      //main.java
+    
+      public static  void main(String[] args) {
+        Restaurant restaurant = new Restaurant();
+        restaurant.addItem("Burger", 5.00);
+        restaurant.addItem("Pizza", 10.00);
+        restaurant.addItem("Salad", 6.00);
+    
+        System.out.println("Menu:Item & Price");
+        restaurant.displayMenu();
+    
+        restaurant.addRating("Burger", 3);
+        restaurant.addRating("Burger", 5);
+        restaurant.addRating("Pizza", 3);
+        restaurant.addRating("Pizza", 4);
+        restaurant.addRating("Salad", 2);
+         
+        double averageRating = restaurant.getAverageRating("Burger");
+        System.out.println("\nAverage rating for Burger: " + averageRating); 	 
+        averageRating = restaurant.getAverageRating("Pizza");
+        System.out.println("Average rating for Pizza: " + averageRating);  	 
+        averageRating = restaurant.getAverageRating("Salad");
+        System.out.println("Average rating for Salad: " + averageRating); 	 	 
+        System.out.println("Average rating: " + restaurant.calculateAverageRating());
+        System.out.println("\nRemove 'Pizza' from the above menu.");
+        restaurant.removeItem("Pizza");
+        System.out.println("\nUpdated menu:");
+        restaurant.displayMenu();
+      }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7086oop18.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 15</h2>
+    <h3>Q.Create a class showing an example of default constructor. </h3>
+    <p>
+      
+<pre>
+    /*Create a class showing an example of default constructor. */
+    class Construct1 {
+        Construct1() {
+            System.out.println("This is a Default Constructor");
+        }
+    
+        public static void main(String args[]) {
+            Construct1 C = new Construct1();
+        }
+    
+    }
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7024oop20.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 16</h2>
+    <h3>Q.Create a class showing an example of parameterized constructor. </h3>
+    <p>
+      
+<pre>
+    /*Create a class showing an example of parameterized constructor. */
+
+    class Main {
+    
+      String languages;
+    
+      // constructor accepting single value
+      Main(String lang) {
+        languages = lang;
+        System.out.println(languages + " Programming Language");
+      }
+    
+      public static void main(String[] args) {
+    
+        // call constructor by passing a single value
+        Main obj1 = new Main("Java");
+        Main obj2 = new Main("C++");
+        Main obj3 = new Main("C");
+      }
+    }
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7024oop21.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 17</h2>
+    <h3>Q.Create a class showing an example of copy constructor. </h3>
+    <p>
+      
+<pre>
+    class Fruit  {  
+        private double fprice;  
+        private String fname;  
+        //constructor to initialize roll number and name of the student  
+        Fruit(double fPrice, String fName)  
+        {   
+        fprice = fPrice;  
+        fname = fName;  
+        }  
+        //creating a copy constructor  
+        Fruit(Fruit fruit)  
+        {  
+        System.out.println("\nAfter invoking the Copy Constructor:\n");  
+        fprice = fruit.fprice;  
+        fname = fruit.fname;  
+        }  
+        //creating a method that returns the price of the fruit  
+        double showPrice()  
+        {  
+        return fprice;  
+        }  
+        //creating a method that returns the name of the fruit  
+        String showName()  
+        {  
+        return fname;  
+        }  
+        //class to create student object and print roll number and name of the student  
+        public static void main(String args[])  
+        {  
+        Fruit f1 = new Fruit(200, "Apple");  
+        System.out.println("Name of the first fruit: "+ f1.showName());  
+        System.out.println("Price of the first fruit: "+ f1.showPrice());  
+        //passing the parameters to the copy constructor  
+        Fruit f2 = new Fruit(f1);  
+        System.out.println("Name of the second fruit: "+ f2.showName());  
+        System.out.println("Price of the second fruit: "+ f2.showPrice());  
+        }  
+        }  
+        
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7086oop22.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 18</h2>
+    <h3>Q.Create a class entering the rollno, name and class of the student from user but rollno should be automatically generated as we enter the information of 10 students </h3>
+    <p>
+      
+<pre>
+    import java.util.Scanner;
+
+    class Student {
+        private static int studentCount = 0;
+        private int rollNo;
+        private String name;
+        private String className;
+    
+        public Student(String name, String className) {
+            this.rollNo = ++studentCount;
+            this.name = name;
+            this.className = className;
+        }
+    
+        public void displayDetails() {
+            System.out.println("Roll No: " + rollNo);
+            System.out.println("Name: " + name);
+            System.out.println("Class: " + className);
+        }
+    }
+    class StudentManagement {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+    
+            Student[] students = new Student[10];
+    
+            for (int i = 0; i < students.length; i++) {
+                System.out.println("Enter details for student " + (i + 1) + ":");
+                System.out.print("Enter name: ");
+                String name = scanner.nextLine();
+    
+                System.out.print("Enter class: ");
+                String className = scanner.nextLine();
+    
+                students[i] = new Student(name, className);
+            }
+    
+            System.out.println("Details of all students:");
+            for (Student student : students) {
+                student.displayDetails();
+                System.out.println("---------------");
+            }
+    
+            scanner.close();
+        }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7085oop23.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 19</h2>
+    <h3>Q.Create a class, entering the command line arguments from the user and show all the arguments as output.. </h3>
+    <p>
+      
+<pre>
+
+    //Create a class, entering the command line arguments from the user and show all the arguments as output.
+
+    class CommandLineArgumentsExample {
+        public static void main(String[] args) {
+          
+            if (args.length == 0) {
+                System.out.println("No command-line arguments provided.");
+            } else {
+                System.out.println("Command-line arguments provided:");
+                for (int i = 0; i < args.length; i++) {
+                    System.out.println("Argument " + (i + 1) + ": " + args[i]);
+                }
+            }
+        }
+    }
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7101oop25.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 20</h2>
+    <h3>Q. Write a Java program to create a class called BankAccount with private instance variables accountNumber and balance. Provide public getter and setter methods to access and modify these variables. </h3>
+    <p>
+      
+<pre>
+    import java.util.Scanner;
+
+    class bankaccount {
+        private String accountNumber;
+        private double balance;
+    
+        public String getAccountNumber() {
+            return accountNumber;
+        }
+    
+        public void setAccountNumber(String accountNumber) {
+            this.accountNumber = accountNumber;
+        }
+    
+        public double getBalance() {
+            return balance;
+        }
+    
+        public void setBalance(double balance) {
+            this.balance = balance;
+        }
+    
+        public static void main(String[] a) {
+            Scanner s = new Scanner(System.in);
+    
+            bankaccount myAccount = new bankaccount();
+    
+            System.out.print("Enter your account number: ");
+            String accountNumber = s.nextLine();
+            myAccount.setAccountNumber(accountNumber);
+    
+            System.out.print("Enter your initial balance: ");
+            double initialBalance = s.nextDouble();
+            myAccount.setBalance(initialBalance);
+    
+            System.out.println("Account Information:");
+            System.out.println("Account Number: " + myAccount.getAccountNumber());
+            System.out.println("Balance: Rs " + myAccount.getBalance());
+        }
+    }
+    
+    
+    
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7003oop27.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 21</h2>
+    <h3>Q.Write a Java program to create a class called Employee with private instance variables employee_id, employee_name, and employee_salary. Provide public getter and setter methods to access and modify the id and name variables, but provide a getter method for the salary variable that returns a formatted string. </h3>
+    <p>
+      
+<pre>
+    class Employee {
+        /*  Topic = Object oriented programme
+     29. Write a Java program to create a class called Employee with
+      private instance variables employee_id, employee_name, and
+       employee_salary. Provide public getter and setter methods to
+        access and modify the id and name variables, but provide a getter
+         method for the salary variable that returns a formatted string. 
+    */ 
+     private int employee_id;
+     private String employee_name;
+     private double employee_salary;
+ 
+     
+     public int getEmployeeId() {
+         return employee_id;
+     }
+ 
+     
+     public void setEmployeeId(int id) {
+         this.employee_id = id;
+     }
+ 
+     
+     public String getEmployeeName() {
+         return employee_name;
+     }
+ 
+    
+     public void setEmployeeName(String name) {
+         this.employee_name = name;
+     }
+ 
+     
+     public String getFormattedSalary() {
+         return String.format("%.2f", employee_salary);
+     }
+ 
+    
+     public void setEmployeeSalary(double salary) {
+         this.employee_salary = salary;
+     }
+ }
+ class prog29{
+     public static void main(String[] args){
+       
+         Employee employee = new Employee();
+ 
+         
+         employee.setEmployeeId(1);
+         employee.setEmployeeName("John Doe");
+         employee.setEmployeeSalary(50000.0);
+ 
+         
+         System.out.println("Employee ID: " + employee.getEmployeeId());
+         System.out.println("Employee Name: " + employee.getEmployeeName());
+         System.out.println("Employee Salary: $" + employee.getFormattedSalary());
+     }
+ }
+ 
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7104oop29.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 22</h2>
+    <h3>Q. Write a Java program to create a class called Circle with a private instance variable radius. Provide public getter and setter methods to access and modify the radius variable. However, provide two methods called calculateArea() and calculatePerimeter() that return the calculated area and perimeter based on the current radius value. </h3>
+    <p>
+      
+<pre>
+    class circle{
+        private int radius=0;
+        public int getter(){
+        return radius;}
+        public void setter(int x){
+        radius=x;}
+        double calculatearea(){
+        int r= getter();
+        double area= 3.14 * r *r;
+        return area;
+        }
+        double calculateperimeter(){
+        int r= getter();
+        double perimeter= 2 * 3.14 * r ;
+        return perimeter; 
+        }
+        public static void main(String s[]){
+        circle obj= new circle();
+        obj.setter(10);
+        System.out.println("Area of circle is: "+ obj.calculatearea());
+        System.out.println("Perimeter of circle is: "+ obj.calculateperimeter());
+        }}
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7035oop30.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 23</h2>
+    <h3>Q.Write a Java program to create a class called Car with private instance variables company_name, model_name, year, and mileage. Provide public getter and setter methods to access and modify the company_name, model_name, and year variables. However, only provide a getter method for the mileage variable. </h3>
+    <p>
+      
+<pre>
+
+    //Write a Java program to create a class called Car with private instance variables company_name, model_name, year, and mileage. Provide public getter and setter methods to access and modify the company_name, model_name, and year variables. However, only provide a getter method for the mileage variable.
+
+    class Car {
+        private String company_name;
+        private String model_name;
+        private int year;
+        private double mileage;
+    
+        
+        public Car(String company_name, String model_name, int year, double mileage) {
+            this.company_name = company_name;
+            this.model_name = model_name;
+            this.year = year;
+            this.mileage = mileage;
+        }
+    
+       
+        public String getCompany_name() {
+            return company_name;
+        }
+    
+        
+        public void setCompany_name(String company_name) {
+            this.company_name = company_name;
+        }
+    
+         
+        public String getModel_name() {
+            return model_name;
+        }
+    
+        
+        public void setModel_name(String model_name) {
+            this.model_name = model_name;
+        }
+    
+        
+        public int getYear() {
+            return year;
+        }
+    
+        
+        public void setYear(int year) {
+            this.year = year;
+        }
+    
+        
+        public double getMileage() {
+            return mileage;
+        }
+    
+        public static void main(String[] args) {
+           
+            Car myCar = new Car("Toyota", "Camry", 2022, 30.5);
+    
+           
+            System.out.println("Company: " + myCar.getCompany_name());
+            System.out.println("Model: " + myCar.getModel_name());
+            System.out.println("Year: " + myCar.getYear());
+            System.out.println("Mileage: " + myCar.getMileage());
+    
+          
+            myCar.setCompany_name("Honda");
+            myCar.setModel_name("Civic");
+            myCar.setYear(2023);
+    
+            System.out.println("Updated Company: " + myCar.getCompany_name());
+            System.out.println("Updated Model: " + myCar.getModel_name());
+            System.out.println("Updated Year: " + myCar.getYear());
+        }
+    }
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7101opp31.png" alt="Java Image">
+    </p>
+</div><div class="program-container">
+    <h2>Program 24</h2>
+    <h3>Q. Write a Java program to create a class called Student with private instance variables student_id, student_name, and grades. Provide public getter and setter methods to access and modify the student_id and student_name variables. However, provide a method called addGrade() that allows adding a grade to the grades variable while performing additional validation. </h3>
+    <p>
+      
+<pre>
+    /*
+    32. Write a Java program to create a class called Student with private instance variables student_id, student_name, and grades. Provide public getter and setter methods to access and modify the student_id and student_name variables. However, provide a method called addGrade() that allows adding a grade to the grades variable while performing additional validation. 
+*/
+class Test
+{
+    public static void main(String args[])
+    {
+        Student student = new Student();
+
+        student.addGrade(12);
+        student.addGrade(12); 
+        student.addGrade(12);
+
+        student.setStudentId("7027/21");
+        student.setStudentName("Mayank");
+
+        System.out.println(student.getStudentId());
+        System.out.println(student.getStudentName());
+        
+        student.displayGrade();
+    }
+}
+class Student
+{
+    private String student_id;
+    private String student_name;
+    private int index, mark[] = new int[3];
+
+    public void setStudentId(String id)
+    {
+        student_id = id;
+    }
+    public void setStudentName(String name)
+    {
+        student_name = name;
+    }
+    public void addGrade(int m)
+    {
+        if (index < mark.length)
+        {
+            mark[index++] = m;
+        }
+        else
+        {
+            System.out.println("index out of bounds");
+        }
+    }
+    public String getStudentId()
+    {
+        return student_id;
+    }
+    public String getStudentName()
+    {
+        return student_name;
+    }
+    public void displayGrade()
+    {
+        for (int n : mark)
+            System.out.println(n);
+    }
+}
+</pre>
+    </p>
+</div>
+
+<div class="output-container">
+    <h2>Output</h2>
+    <p>
+        <img src="javapro/Object Oriented Programming/7027oop32.png" alt="Java Image">
+    </p>
+</div>
+<footer>
+    <p>ABOUT US
+        Gurjeet Singh
+        Post Graduate Govt. Collage, Sector 11, Chandigarh.
+    </p>
+    <p>Contact Us: garrybains2002@gmail.com</p>
+</footer>
+
+</body>
+</html>
